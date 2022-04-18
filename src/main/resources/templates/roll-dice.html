@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Roll Dice</title>
+</head>
+<body>
+	<nav th:replace="partials :: navbar"></nav>
+	<div>
+		<h1>Guess Dice Roll</h1>
+		<a href="/roll-dice/1" type="button">
+			<button>1</button>
+		</a> <a href="/roll-dice/2" type="button">
+		<button>2</button>
+	</a> <a href="/roll-dice/3" type="button">
+		<button>3</button>
+	</a> <a href="/roll-dice/4" type="button">
+		<button>4</button>
+	</a> <a href="/roll-dice/5" type="button">
+		<button>5</button>
+	</a> <a href="/roll-dice/6" type="button">
+		<button>6</button>
+	</a>
+	</div>
+	<div th:if="${guessedNumber != null}">
+		<h1>Results</h1>
+		<h3><span th:text="${correctCount}"></span> correct out of <span th:text="${diceCount}"></span> dice!</h3>
+		<div>Guessed: <span th:text="${guessedNumber}"></span></div>
+		<div>Rolled:
+			<div th:each="number : ${rolledNumbers}">
+				<div th:if="${number == guessedNumber}"><strong th:text="${number}"></strong></div>
+				<div th:if="${number != guessedNumber}"><p th:text="${number}"></p></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
