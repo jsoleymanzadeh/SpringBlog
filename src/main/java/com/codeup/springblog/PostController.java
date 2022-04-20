@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @RequestMapping(path = "/posts", method = RequestMethod.GET)
@@ -31,7 +33,7 @@ public class PostController {
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
     public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-        postDao.save(new Post(title, body));
+        postDao.save(new Post(title, body, userDao.getUserById(1)));
         return "redirect:/posts";
     }
 }
