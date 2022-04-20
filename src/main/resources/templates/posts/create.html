@@ -7,18 +7,9 @@
 <body>
 	<nav th:replace="partials :: navbar"></nav>
 	<h1>Create New Post</h1>
-	<form action="/posts/create" method="post">
-		<div>
-			<h3>
-				<label for="title">Title</label>
-			</h3>
-			<input id="title" type="text" name="title"></div>
-		<div>
-			<h3>
-				<label for="body">Body</label>
-			</h3>
-			<textarea name="body" id="body" cols="30" rows="10"></textarea></div>
-		<div><input type="submit" value="Create Post"></div>
+	<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+		<div th:replace="partials :: postForms"></div>
+		<input type="submit" value="Create Post">
 	</form>
 </body>
 </html>

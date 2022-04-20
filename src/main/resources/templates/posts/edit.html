@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Post</title>
+</head>
+<body>
+	<nav th:replace="partials :: navbar"></nav>
+	<form th:action="@{/posts/edit}" th:method="post" th:object="${post}">
+		<div th:replace="partials :: postForms"></div>
+		<input th:field="*{id}" hidden> <input th:field="*{user}" hidden> <input type="submit" value="Save Changes">
+	</form>
+</body>
+</html>

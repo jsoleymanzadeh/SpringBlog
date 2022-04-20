@@ -13,7 +13,7 @@ public class Post {
     @Column(nullable = false, columnDefinition = "text")
     private String body;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Post() {
