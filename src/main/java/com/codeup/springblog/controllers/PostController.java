@@ -1,9 +1,11 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +42,7 @@ public class PostController {
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
     public String createPost(@ModelAttribute Post post) {
-        post.setUser(userDao.getUserById(1));
+        post.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         post = postDao.save(post);
         emailService.prepareAndSend(post, "New Post", "Your post titled \"" + post.getTitle() + "\" is live!\nSee it here: http://localhost:8080/posts/" + post.getId());
         return "redirect:/posts";
